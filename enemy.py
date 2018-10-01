@@ -1,5 +1,6 @@
 import pygame
+from pygame.sprite import Sprite
 
-class enemy():
+class enemy(Sprite):
     def __init__(self):
         pass
