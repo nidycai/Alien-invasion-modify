@@ -2,12 +2,13 @@ import pygame
 from bullets import Bullets 
 
 class Ship():
-    def __init__(self, screen_rect):
-        self.screen_rect = screen_rect
+    def __init__(self, screen):
+        self.screen = screen
+        self.screen_rect = screen.get_rect()
         self.image = pygame.image.load('images/ship.bmp').convert()
         self.rect = self.image.get_rect()
-        self.rect.centerx = screen_rect.centerx
-        self.rect.bottom = screen_rect.bottom 
+        self.rect.centerx = self.screen_rect.centerx
+        self.rect.bottom = self.screen_rect.bottom 
         self.bullets = pygame.sprite.Group() 
     
     def move(self, direction):
@@ -18,8 +19,13 @@ class Ship():
     def fire(self):
         if len(self.bullets) < 3:
             self.bullets.add(Bullets(self.rect))
-            print(self.bullets)
 
     def update(self):
+        bullet_remove = []
         for bullet in self.bullets:
-            bullet.draw_bullet(self.screen_rect)
+            if bullet.check_edge():
+                bullet_remove.append(bullet)
+        for bullet in bullet_remove:
+            self.bullets.remove(bullet)
+        for bullet in self.bullets:
+            bullet.draw_bullet(self.screen)

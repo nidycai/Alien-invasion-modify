@@ -15,7 +15,7 @@ class Game():
         
 
     def run(self):
-        self.ship = Ship(self.screen_rect)
+        self.ship = Ship(self.screen)
         self.screen.fill(self.settings.bg_color) 
 
 
