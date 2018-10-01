@@ -32,6 +32,7 @@ class Game():
                     if event.key == pygame.K_SPACE:
                         self.ship.fire()
             self.screen.fill(self.settings.bg_color)
+            self.ship.update()
             self.screen.blit(self.ship.image, self.ship.rect)
             pygame.display.flip()
 
