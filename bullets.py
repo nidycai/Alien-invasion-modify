@@ -11,7 +11,7 @@ class Bullets(Sprite):
         self.color = ((0, 0, 0))    
 
     def update(self):
-        self.rect.y -= 1
+        self.rect.y -= 3
 
     def draw_bullet(self, screen):
         self.update()

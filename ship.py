@@ -20,7 +20,8 @@ class Ship():
         if len(self.bullets) < 3:
             self.bullets.add(Bullets(self.rect))
 
-    def update(self):
+    def update(self, direction):
+        self.move(direction)
         bullet_remove = []
         for bullet in self.bullets:
             if bullet.check_edge():

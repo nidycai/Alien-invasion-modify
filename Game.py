@@ -3,6 +3,7 @@ import sys
 import pygame
 from game_settings import GameSettings
 from ship import Ship
+import game_function as gf
 
 
 class Game():
@@ -16,8 +17,6 @@ class Game():
 
     def run(self):
         self.ship = Ship(self.screen)
-        self.screen.fill(self.settings.bg_color) 
-
 
         print('游戏开始')
         while True:
@@ -26,13 +25,20 @@ class Game():
                     sys.exit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_LEFT:
-                        self.ship.move(-self.settings.speed)
+                        self.settings.speed = -1
                     if event.key == pygame.K_RIGHT:
-                        self.ship.move(self.settings.speed)
+                        self.settings.speed = 1
                     if event.key == pygame.K_SPACE:
                         self.ship.fire()
+                if event.type == pygame.KEYUP and event.key != pygame.K_SPACE:
+                    self.settings.speed = 0
+
             self.screen.fill(self.settings.bg_color)
-            self.ship.update()
+            enemy_fleet = gf.create_fleet(self.screen)
+            # gf.update_enemy(enemy_fleet)
+            enemy_fleet.update()
+            enemy_fleet.draw(self.screen)
+            self.ship.update(self.settings.speed)
             self.screen.blit(self.ship.image, self.ship.rect)
             pygame.display.flip()
 
