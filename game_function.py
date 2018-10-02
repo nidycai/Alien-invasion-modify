@@ -27,9 +27,11 @@ def update_enemy(enemies):
     if drop == 1:
         for enemy in enemies.sprites():
             enemy.move_down()
+            enemy.move_dir *= -1
     enemies.update()
     
-
+def check_collison(enemies, bullets):
+    collision = pygame.sprite.groupcollide(enemies,bullets,True,True)
             
 
         

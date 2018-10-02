@@ -12,7 +12,7 @@ class Ship():
         self.bullets = pygame.sprite.Group() 
     
     def move(self, direction):
-        if self.rect.left>0 and self.rect.right<self.screen_rect.right:
+        if self.rect.left>self.screen_rect.left and self.rect.right<self.screen_rect.right:
             self.rect.x += direction 
 
 

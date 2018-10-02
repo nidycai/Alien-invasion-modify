@@ -10,8 +10,8 @@ class Enemy(Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = enemy_x
         self.rect.y = enemy_y
-        self.move_dir = 5
-        self.drop = 1
+        self.move_dir = 1
+        self.drop = 5
 
     def get_num(self):
         # 根据screen宽度计算一行有多少个
@@ -33,5 +33,5 @@ class Enemy(Sprite):
         self.rect.y += self.drop
 
     def update(self):
-        self.rect.x += 5 
         # print(self.rect.x)
+        self.rect.left += self.move_dir

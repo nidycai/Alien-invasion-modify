@@ -17,7 +17,7 @@ class Game():
 
     def run(self):
         self.ship = Ship(self.screen)
-
+        enemy_fleet = gf.create_fleet(self.screen)
         print('游戏开始')
         while True:
             for event in pygame.event.get():
@@ -34,9 +34,9 @@ class Game():
                     self.settings.speed = 0
 
             self.screen.fill(self.settings.bg_color)
-            enemy_fleet = gf.create_fleet(self.screen)
-            # gf.update_enemy(enemy_fleet)
-            enemy_fleet.update()
+            gf.check_collison(enemy_fleet, self.ship.bullets)
+            gf.update_enemy(enemy_fleet)
+            # enemy_fleet.update()
             enemy_fleet.draw(self.screen)
             self.ship.update(self.settings.speed)
             self.screen.blit(self.ship.image, self.ship.rect)
