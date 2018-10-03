@@ -44,21 +44,29 @@ def check_ship_hit(enemies, ship):
 
 def check_collide(enemies, bullets, ship, screen):
     check_collison(enemies, bullets)
-    if len(enemies)==0:
-        create_fleet(screen, enemies)
+    if len(enemies)==0 or check_bottom(enemies) or check_ship_hit(enemies, ship):
+        reset(ship, enemies, screen)
+    #     create_fleet(screen, enemies)
     
-    if check_bottom(enemies):
-        enemies.empty()
-        create_fleet(screen, enemies)
+    # if check_bottom(enemies):
+    #     enemies.empty()
+    #     create_fleet(screen, enemies)
 
-    if check_ship_hit(enemies, ship):
-        sleep(0.5)
-        create_fleet(screen, enemies)
-        ship.centered()
+    # if check_ship_hit(enemies, ship):
+    #     sleep(0.5)
+    #     create_fleet(screen, enemies)
+    #     ship.centered()
 
 def check_alien_none(screen, enemies):
     if len(enemies) == 0:
         create_fleet(screen, enemies)
             
+def reset(ship, enemies, screen):
+    if len(enemies) != 0:
+        sleep(0.5)
+        ship.centered()
+    enemies.empty()
+    create_fleet(screen, enemies)
+
 
         

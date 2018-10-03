@@ -8,10 +8,10 @@ import game_function as gf
 
 
 class Game():
-    def __init__(self, settings):
-        self.settings = settings
+    def __init__(self):
+        self.settings = GameSettings()
         pygame.init()
-        self.screen = pygame.display.set_mode((settings.screen_width, settings.screen_height))
+        self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
         self.screen_rect = self.screen.get_rect()
         pygame.display.set_caption('Alien Invasion')
         
@@ -51,6 +51,5 @@ class Game():
 
 
 
-settings = GameSettings()
-game = Game(settings)
+game = Game()
 game.run()
