@@ -32,6 +32,11 @@ def update_enemy(enemies):
     
 def check_collison(enemies, bullets):
     collision = pygame.sprite.groupcollide(enemies,bullets,True,True)
+
+
+def check_alien_none(screen, enemies):
+    if len(enemies) == 0:
+        return create_fleet(screen)
             
 
         

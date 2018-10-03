@@ -25,20 +25,24 @@ class Game():
                     sys.exit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_LEFT:
-                        self.settings.speed = -1
+                        self.ship.moving_left = True
                     if event.key == pygame.K_RIGHT:
-                        self.settings.speed = 1
+                        self.ship.moving_right = True
                     if event.key == pygame.K_SPACE:
                         self.ship.fire()
-                if event.type == pygame.KEYUP and event.key != pygame.K_SPACE:
-                    self.settings.speed = 0
-
+                if event.type == pygame.KEYUP:
+                    if event.key == pygame.K_LEFT:
+                        self.ship.moving_left = False
+                    if event.key == pygame.K_RIGHT:
+                        self.ship.moving_right = False
+            if len(enemy_fleet) == 0:
+                enemy_fleet = gf.create_fleet(self.screen)
             self.screen.fill(self.settings.bg_color)
             gf.check_collison(enemy_fleet, self.ship.bullets)
             gf.update_enemy(enemy_fleet)
             # enemy_fleet.update()
             enemy_fleet.draw(self.screen)
-            self.ship.update(self.settings.speed)
+            self.ship.update()
             self.screen.blit(self.ship.image, self.ship.rect)
             pygame.display.flip()
 

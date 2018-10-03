@@ -10,18 +10,21 @@ class Ship():
         self.rect.centerx = self.screen_rect.centerx
         self.rect.bottom = self.screen_rect.bottom 
         self.bullets = pygame.sprite.Group() 
+        self.moving_left, self.moving_right = 0, 0
     
-    def move(self, direction):
-        if self.rect.left>self.screen_rect.left and self.rect.right<self.screen_rect.right:
-            self.rect.x += direction 
+    def move(self):
+        if self.rect.left > self.screen_rect.left and self.moving_left:
+            self.rect.left -= 1        
+        if self.rect.right < self.screen_rect.right and self.moving_right:
+            self.rect.centerx += 1 
 
 
     def fire(self):
         if len(self.bullets) < 3:
             self.bullets.add(Bullets(self.rect))
 
-    def update(self, direction):
-        self.move(direction)
+    def update(self):
+        self.move()
         bullet_remove = []
         for bullet in self.bullets:
             if bullet.check_edge():
