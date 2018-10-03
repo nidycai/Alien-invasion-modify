@@ -11,7 +11,7 @@ class Enemy(Sprite):
         self.rect.x = enemy_x
         self.rect.y = enemy_y
         self.move_dir = 1
-        self.drop = 5
+        self.drop = 20
 
     def get_num(self):
         # 根据screen宽度计算一行有多少个
@@ -28,6 +28,10 @@ class Enemy(Sprite):
             return True
         elif self.rect.right >= self.screen_rect.right:
             return True 
+
+    def check_bottom(self):
+        if self.rect.bottom >= self.screen_rect.bottom:
+            return True
 
     def move_down(self):
         self.rect.y += self.drop

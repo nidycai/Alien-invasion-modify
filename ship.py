@@ -1,8 +1,10 @@
 import pygame
 from bullets import Bullets 
+from pygame.sprite import Sprite
 
-class Ship():
+class Ship(Sprite):
     def __init__(self, screen):
+        super().__init__()
         self.screen = screen
         self.screen_rect = screen.get_rect()
         self.image = pygame.image.load('images/ship.bmp').convert()
@@ -33,3 +35,6 @@ class Ship():
             self.bullets.remove(bullet)
         for bullet in self.bullets:
             bullet.draw_bullet(self.screen)
+
+    def centered(self):
+        self.rect.centerx = self.screen_rect.centerx

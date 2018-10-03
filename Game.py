@@ -3,6 +3,7 @@ import sys
 import pygame
 from game_settings import GameSettings
 from ship import Ship
+
 import game_function as gf
 
 
@@ -17,7 +18,8 @@ class Game():
 
     def run(self):
         self.ship = Ship(self.screen)
-        enemy_fleet = gf.create_fleet(self.screen)
+        enemy_fleet = pygame.sprite.Group()
+        gf.create_fleet(self.screen, enemy_fleet)
         print('游戏开始')
         while True:
             for event in pygame.event.get():
@@ -35,10 +37,11 @@ class Game():
                         self.ship.moving_left = False
                     if event.key == pygame.K_RIGHT:
                         self.ship.moving_right = False
-            if len(enemy_fleet) == 0:
-                enemy_fleet = gf.create_fleet(self.screen)
+            # if len(enemy_fleet) == 0:
+            #     enemy_fleet = gf.create_fleet(self.screen)
             self.screen.fill(self.settings.bg_color)
-            gf.check_collison(enemy_fleet, self.ship.bullets)
+            # gf.check_collison(enemy_fleet, self.ship.bullets)
+            gf.check_collide(enemy_fleet, self.ship.bullets, self.ship, self.screen)
             gf.update_enemy(enemy_fleet)
             # enemy_fleet.update()
             enemy_fleet.draw(self.screen)
